@@ -16,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.apply {
             edtPassword.validateLenght(tilPassword)
+            edtEmail.validateFormat(tilEmail)
         }
     }
 }
