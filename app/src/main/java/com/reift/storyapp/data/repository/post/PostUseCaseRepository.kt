@@ -1,4 +1,4 @@
-package com.reift.storyapp.domain.repository.post
+package com.reift.storyapp.data.repository.post
 
 import com.reift.storyapp.domain.usecase.post.PostUseCase
 
