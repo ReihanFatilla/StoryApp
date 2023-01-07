@@ -5,5 +5,5 @@ import com.reift.storyapp.domain.entity.Resource
 import io.reactivex.rxjava3.core.Flowable
 
 interface StoryUseCase {
-    fun getAllStories(authToken: String): Flowable<Resource<List<Story>>>
+    fun getAllStories(): Flowable<Resource<List<Story>>>
 }

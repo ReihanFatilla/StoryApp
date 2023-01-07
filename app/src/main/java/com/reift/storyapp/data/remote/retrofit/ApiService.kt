@@ -3,6 +3,7 @@ package com.reift.storyapp.data.remote.retrofit
 import com.reift.storyapp.data.remote.response.login.LoginResponse
 import com.reift.storyapp.data.remote.response.post.Post
 import com.reift.storyapp.data.remote.response.register.Register
+import com.reift.storyapp.data.remote.response.register.RegisterResponse
 import com.reift.storyapp.data.remote.response.story.StoryResponse
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.MultipartBody
@@ -23,7 +24,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ) : Flowable<Register>
+    ) : Flowable<RegisterResponse>
 
     @FormUrlEncoded
     @POST("login")

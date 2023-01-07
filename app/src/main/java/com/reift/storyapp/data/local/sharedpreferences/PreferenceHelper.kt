@@ -1,4 +1,4 @@
-package com.reift.storyapp.data.local
+package com.reift.storyapp.data.local.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
