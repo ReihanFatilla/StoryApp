@@ -4,6 +4,7 @@ import com.reift.storyapp.data.remote.response.login.LoginResponse
 import com.reift.storyapp.data.remote.response.post.Post
 import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.data.remote.response.story.StoryResponse
+import io.reactivex.rxjava3.core.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -12,9 +13,9 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("stories")
-    suspend fun getStories(
+    fun getStories(
         @Header("Authorization") authToken: String
-    ) : Call<StoryResponse>
+    ) : Flowable<StoryResponse>
 
     @FormUrlEncoded
     @POST("register")
@@ -22,14 +23,14 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ) : Call<Register>
+    ) : Flowable<Register>
 
     @FormUrlEncoded
     @POST("login")
     fun loginUser(
         @Field("email") email: String,
         @Field("password") password: String
-    ) : Call<LoginResponse>
+    ) : Flowable<LoginResponse>
 
     @FormUrlEncoded
     @POST("stories")
@@ -37,5 +38,5 @@ interface ApiService {
         @Header("Authorization") userToken: String,
         @Part image: MultipartBody.Part,
         @Part("description") description: RequestBody
-    ) : Call<Post>
+    ) : Flowable<Post>
 }
