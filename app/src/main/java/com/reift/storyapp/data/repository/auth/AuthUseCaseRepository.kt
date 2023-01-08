@@ -30,7 +30,7 @@ class AuthUseCaseRepository(
     ): Flowable<Resource<Register>> {
         return object : NetworkResource<Register, RegisterResponse>(){
             override fun createResult(data: RegisterResponse): Register {
-                return Register(data.message.orEmpty())
+                return data.map()
             }
 
             override fun createCall(): Flowable<RegisterResponse> {
@@ -53,7 +53,9 @@ class AuthUseCaseRepository(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         {
-                        localDataSource.login(it.loginResult.token.orEmpty())
+                            if(it.error == false){
+                                localDataSource.login(it.loginResult.token.orEmpty())
+                            }
                         },
                         {}
                     )
