@@ -8,4 +8,5 @@ import io.reactivex.rxjava3.core.Flowable
 interface AuthUseCase {
     fun registerUser(name: String, email: String, password: String): Flowable<Resource<Register>>
     fun loginUser(email: String, password: String): Flowable<Resource<Login>>
+    fun isUserLogin(): Boolean
 }

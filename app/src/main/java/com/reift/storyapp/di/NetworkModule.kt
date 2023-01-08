@@ -15,13 +15,6 @@ val networkModule = module {
         OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addInterceptor {
-                val request = it.request()
-                    .newBuilder()
-                    .addHeader("Content-Type", "application/json")
-                    .build()
-                return@addInterceptor it.proceed(request)
-            }
             .pingInterval(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)

@@ -66,4 +66,8 @@ class AuthUseCaseRepository(
         }.asFlowable()
     }
 
+    override fun isUserLogin(): Boolean {
+        return localDataSource.isUserLogin()
+    }
+
 }

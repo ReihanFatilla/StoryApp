@@ -10,6 +10,7 @@ object AuthMapper {
         return with(loginResult) {
             Login(
                 isError = error ?: true,
+                message = message.orEmpty(),
                 name = name.orEmpty(),
                 userId = userId.orEmpty(),
                 token = token.orEmpty()
