@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_email">
 
-        <com.reift.storyapp.customview.UsernameEditText
+        <com.reift.storyapp.customview.PasswordEditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

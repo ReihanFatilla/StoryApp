@@ -8,7 +8,7 @@ import com.reift.storyapp.domain.usecase.post.PostUseCase
 import com.reift.storyapp.domain.usecase.story.StoryUseCase
 import org.koin.dsl.module
 
-val repositoryModule = module {
+val useCaseModule = module {
     single<AuthUseCase> { AuthUseCaseRepository(get(), get()) }
     single<PostUseCase> { PostUseCaseRepository() }
     single<StoryUseCase> { StoryUseCaseRepository(get(), get()) }

@@ -34,8 +34,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_story_app">
 
-        <com.reift.storyapp.customview.EmailInputEditText
-            android:id="@+id/edt_email"
+        <com.reift.storyapp.customview.UsernameInputEditText
+            android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/til_username">
 
         <com.reift.storyapp.customview.EmailInputEditText
-            android:id="@+id/edt_EMail"
+            android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_email">
 
-        <com.reift.storyapp.customview.UsernameEditText
+        <com.reift.storyapp.customview.PasswordEditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,9 +96,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:backgroundTint="@color/black"
         android:fontFamily="@font/poppins_medium"
         android:text="Register"
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/til_password"
         tools:layout_editor_absoluteX="16dp" />
 
