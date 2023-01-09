@@ -8,19 +8,26 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.reift.storyapp.R
 import com.reift.storyapp.databinding.ActivityPostBinding
 import com.reift.storyapp.utils.MediaUtils.createCustomTempFile
+import com.reift.storyapp.utils.MediaUtils.reduceFileImage
 import com.reift.storyapp.utils.MediaUtils.uriToFile
 import java.io.File
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPostBinding
 
     private lateinit var currentPhotoPath: String
+
+    private val viewModel: PostViewModel by viewModel()
+
+    private var photoFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,21 @@ class PostActivity : AppCompatActivity() {
             fabCamera.setOnClickListener{
                 startCamera()
             }
+            btnUpload.setOnClickListener {
+                uploadImage()
+            }
+        }
+    }
+
+    private fun uploadImage() {
+        val description = binding.edtDescription.toString()
+        if (photoFile == null) {
+            Toast.makeText(this, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+        } else if (description.isNullOrEmpty()) {
+            Toast.makeText(this, "Silakan isi deskripsi terlebih dahulu", Toast.LENGTH_SHORT).show()
+        } else {
+            val file = reduceFileImage(photoFile as File)
+            viewModel.postStory(description, file)
         }
     }
 
@@ -70,6 +92,7 @@ class PostActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedImg, this)
+            photoFile = myFile
             binding.imgThumbnail.setImageURI(selectedImg)
         }
     }
@@ -79,10 +102,9 @@ class PostActivity : AppCompatActivity() {
     ) {
         if (it.resultCode == RESULT_OK) {
             val myFile = File(currentPhotoPath)
-
             val result = BitmapFactory.decodeFile(myFile.path)
-
             binding.imgThumbnail.setImageBitmap(result)
+            photoFile = myFile
         }
     }
 

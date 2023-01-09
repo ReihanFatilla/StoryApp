@@ -1,14 +1,13 @@
 package com.reift.storyapp.data.remote.retrofit
 
 import com.reift.storyapp.data.remote.response.login.LoginResponse
-import com.reift.storyapp.data.remote.response.post.Post
-import com.reift.storyapp.data.remote.response.register.Register
+import com.reift.storyapp.data.remote.response.post.PostResponse
+import com.reift.storyapp.domain.entity.post.Post
 import com.reift.storyapp.data.remote.response.register.RegisterResponse
 import com.reift.storyapp.data.remote.response.story.StoryResponse
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
@@ -33,12 +32,12 @@ interface ApiService {
         @Field("password") password: String
     ) : Flowable<LoginResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("stories")
     fun postStory(
         @Header("Authorization") userToken: String,
         @Part image: MultipartBody.Part,
         @Part("description") description: RequestBody
-    ) : Flowable<Post>
+    ) : Flowable<PostResponse>
 
 }

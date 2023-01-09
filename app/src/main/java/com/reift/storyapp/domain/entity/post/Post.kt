@@ -1,4 +1,4 @@
-package com.reift.storyapp.data.remote.response.post
+package com.reift.storyapp.domain.entity.post
 
 import com.google.gson.annotations.SerializedName
 

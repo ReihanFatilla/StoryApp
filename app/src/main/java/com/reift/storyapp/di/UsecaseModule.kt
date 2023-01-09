@@ -10,6 +10,6 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
     single<AuthUseCase> { AuthUseCaseRepository(get(), get()) }
-    single<PostUseCase> { PostUseCaseRepository() }
+    single<PostUseCase> { PostUseCaseRepository(get(), get()) }
     single<StoryUseCase> { StoryUseCaseRepository(get(), get()) }
 }
