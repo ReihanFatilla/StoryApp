@@ -1,6 +1,6 @@
 package com.reift.storyapp.mapper
 
-import com.reift.storyapp.data.remote.response.story.Story
+import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.data.remote.response.story.StoryResponse
 
 object StoryMapper {

@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.reift.storyapp.data.remote.response.story.Story
+import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.databinding.ItemStoryBinding
 
-class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter(val itemClicked: (story: Story) -> Unit): RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
     val listStory = arrayListOf<Story>()
 
@@ -31,6 +31,11 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
                 Glide.with(imgThumbnail.context)
                     .load(photoUrl)
                     .into(imgThumbnail)
+
+                holder.binding.root.setOnClickListener {
+                    itemClicked(this)
+                }
+
             }
         }
     }

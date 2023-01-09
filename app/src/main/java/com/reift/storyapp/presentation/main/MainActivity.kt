@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.reift.storyapp.constant.BundleConst
 import com.reift.storyapp.databinding.ActivityMainBinding
 import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.presentation.detail.DetailBottomFragment
 import com.reift.storyapp.presentation.login.LoginActivity
 import com.reift.storyapp.presentation.main.adapter.StoryAdapter
 import com.reift.storyapp.presentation.post.PostActivity
@@ -54,7 +56,13 @@ class MainActivity : AppCompatActivity() {
             when (resource) {
                 is Resource.Success -> {
                     binding.rvStory.apply {
-                        val mAdapter = StoryAdapter()
+                        val mAdapter = StoryAdapter{ story ->
+                            val bundle = Bundle()
+                            val detailBottomFragment = DetailBottomFragment()
+                            bundle.putParcelable(BundleConst.DETAIL_DATA, story)
+                            detailBottomFragment.arguments = bundle
+                            detailBottomFragment.show(supportFragmentManager, null)
+                        }
                         adapter = mAdapter
                         layoutManager = LinearLayoutManager(applicationContext)
                         resource.data?.let { story -> mAdapter.setStory(story) }
