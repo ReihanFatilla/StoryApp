@@ -3,6 +3,8 @@ package com.reift.storyapp.presentation.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import com.reift.storyapp.R
 import com.reift.storyapp.data.remote.response.login.Login
@@ -10,6 +12,7 @@ import com.reift.storyapp.databinding.ActivityLoginBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.main.MainActivity
 import com.reift.storyapp.presentation.register.RegisterActivity
+import com.reift.storyapp.utils.Animator
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -24,10 +27,25 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpView()
+        animateView()
         checkUserSession()
         buttonEnablelation()
         validateForm()
         setUpLogin()
+    }
+
+    private fun animateView() {
+        binding.apply {
+            Animator.slideFade(tilPassword)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                Animator.slideFade(tilEmail)
+                Animator.bottomFade(llRegister)
+            }, 100)
+
+            Animator.topFade(tvStoryApp)
+            Animator.bottomFade(btnLogin)
+        }
     }
 
     private fun checkUserSession() {

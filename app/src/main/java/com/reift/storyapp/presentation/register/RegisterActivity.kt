@@ -3,12 +3,13 @@ package com.reift.storyapp.presentation.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.databinding.ActivityRegisterBinding
-import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.login.LoginActivity
+import com.reift.storyapp.utils.Animator
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
@@ -23,9 +24,27 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpView()
+        animateView()
         validateForm()
         buttonEnablelation()
         setUpRegister()
+    }
+
+    private fun animateView() {
+        binding.apply {
+            Animator.slideFade(tilPassword)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                Animator.slideFade(tilEmail)
+                Animator.bottomFade(llLogin)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    Animator.slideFade(tilUsername)
+                }, 100)
+            }, 100)
+
+            Animator.topFade(tvStoryApp)
+            Animator.bottomFade(btnRegister)
+        }
     }
 
     private fun buttonEnablelation() {
@@ -83,4 +102,5 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
 }
