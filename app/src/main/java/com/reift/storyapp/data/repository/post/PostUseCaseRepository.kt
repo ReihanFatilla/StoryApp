@@ -8,7 +8,6 @@ import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.domain.entity.post.Post
 import com.reift.storyapp.domain.usecase.post.PostUseCase
 import com.reift.storyapp.mapper.PostMapper.map
-import com.reift.storyapp.utils.MediaUtils
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

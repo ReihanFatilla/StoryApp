@@ -1,8 +1,9 @@
 package com.reift.storyapp.presentation.register
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.reift.storyapp.data.remote.response.register.Register
-import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.domain.usecase.auth.AuthUseCase
 
 class RegisterViewModel(

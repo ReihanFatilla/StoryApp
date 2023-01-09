@@ -1,6 +1,5 @@
 package com.reift.storyapp.di
 
-import com.reift.storyapp.domain.usecase.story.StoryUseCase
 import com.reift.storyapp.presentation.detail.DetailViewModel
 import com.reift.storyapp.presentation.login.LoginViewModel
 import com.reift.storyapp.presentation.main.MainViewModel

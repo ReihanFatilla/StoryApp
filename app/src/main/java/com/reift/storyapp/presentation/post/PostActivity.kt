@@ -2,14 +2,13 @@ package com.reift.storyapp.presentation.post
 
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.reift.storyapp.R
 import com.reift.storyapp.databinding.ActivityPostBinding
@@ -19,8 +18,8 @@ import com.reift.storyapp.presentation.main.MainActivity
 import com.reift.storyapp.utils.MediaUtils.createCustomTempFile
 import com.reift.storyapp.utils.MediaUtils.reduceFileImage
 import com.reift.storyapp.utils.MediaUtils.uriToFile
-import java.io.File
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.io.File
 
 class PostActivity : AppCompatActivity() {
 

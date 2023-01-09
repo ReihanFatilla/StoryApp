@@ -2,7 +2,6 @@ package com.reift.storyapp.data.repository.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.reift.storyapp.R
 import com.reift.storyapp.data.local.LocalDataSource
 import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.data.remote.response.login.LoginResponse
@@ -15,7 +14,6 @@ import com.reift.storyapp.mapper.AuthMapper.map
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.Serializable
 
 class AuthUseCaseRepository(
     val apiService: ApiService,

@@ -2,7 +2,6 @@ package com.reift.storyapp.data.remote.retrofit
 
 import com.reift.storyapp.data.remote.response.login.LoginResponse
 import com.reift.storyapp.data.remote.response.post.PostResponse
-import com.reift.storyapp.domain.entity.post.Post
 import com.reift.storyapp.data.remote.response.register.RegisterResponse
 import com.reift.storyapp.data.remote.response.story.StoryResponse
 import io.reactivex.rxjava3.core.Flowable

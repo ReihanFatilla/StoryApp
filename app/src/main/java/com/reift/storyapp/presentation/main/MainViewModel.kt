@@ -3,8 +3,8 @@ package com.reift.storyapp.presentation.main
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.domain.usecase.story.StoryUseCase
 
 class MainViewModel(

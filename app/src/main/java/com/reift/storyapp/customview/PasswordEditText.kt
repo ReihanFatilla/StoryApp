@@ -1,16 +1,13 @@
 package com.reift.storyapp.customview
 
 import android.content.Context
-import android.graphics.Canvas
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.reift.storyapp.R
-import com.reift.storyapp.`interface`.AuthTextListener
 
 class PasswordEditText: TextInputEditText {
 

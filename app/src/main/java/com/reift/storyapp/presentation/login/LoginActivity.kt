@@ -1,15 +1,13 @@
 package com.reift.storyapp.presentation.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import com.reift.storyapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.databinding.ActivityLoginBinding
-import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.dialog.LoadingDialog
 import com.reift.storyapp.presentation.main.MainActivity
 import com.reift.storyapp.presentation.register.RegisterActivity

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.databinding.ItemStoryBinding
+import com.reift.storyapp.domain.entity.story.Story
 
 class StoryAdapter(val itemClicked: (story: Story) -> Unit): RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
