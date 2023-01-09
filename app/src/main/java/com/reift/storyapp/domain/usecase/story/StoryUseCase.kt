@@ -6,4 +6,5 @@ import io.reactivex.rxjava3.core.Flowable
 
 interface StoryUseCase {
     fun getAllStories(): Flowable<Resource<List<Story>>>
+    fun logout()
 }

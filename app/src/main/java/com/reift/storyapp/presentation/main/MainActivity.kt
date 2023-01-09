@@ -1,11 +1,13 @@
 package com.reift.storyapp.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reift.storyapp.databinding.ActivityMainBinding
 import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.presentation.login.LoginActivity
 import com.reift.storyapp.presentation.main.adapter.StoryAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -21,10 +23,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initObserver()
+        logoutButton()
+    }
 
+    private fun logoutButton() {
+        binding.btnLogout.setOnClickListener {
+            viewModel.logout()
+            intentToLogin()
+        }
+    }
+
+    private fun intentToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
     private fun initObserver() {
+        viewModel.getAllStories()
         viewModel.storyResponse.observe(this) { resource ->
             when (resource) {
                 is Resource.Success -> {

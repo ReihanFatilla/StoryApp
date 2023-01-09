@@ -71,15 +71,35 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_image"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_img"
-        app:tint="@color/white"
-        android:backgroundTint="@color/black"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="48dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camera"
+            app:tint="@color/white"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/black"
+             />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_gallery"
+            app:tint="@color/white"
+            android:backgroundTint="@color/black"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

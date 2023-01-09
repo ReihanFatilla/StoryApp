@@ -24,4 +24,8 @@ class MainViewModel(
         }
     }
 
+    fun logout(){
+        storyUseCase.logout()
+    }
+
 }

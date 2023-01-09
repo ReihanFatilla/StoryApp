@@ -1,5 +1,6 @@
 package com.reift.storyapp.data.repository.story
 
+import android.util.Log
 import com.reift.storyapp.data.NetworkResource
 import com.reift.storyapp.data.local.LocalDataSource
 import com.reift.storyapp.data.remote.response.story.Story
@@ -24,9 +25,14 @@ class StoryUseCaseRepository(
             }
 
             override fun createCall(): Flowable<StoryResponse> {
+                Log.i("createCallcreateCall", "createCall: $authToken")
                 return apiService.getStories(authToken)
             }
 
         }.asFlowable()
+    }
+
+    override fun logout() {
+        localDataSource.logout()
     }
 }
