@@ -11,6 +11,11 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
     val listStory = arrayListOf<Story>()
 
+    fun setStory(list: List<Story>){
+        listStory.clear()
+        listStory.addAll(list)
+    }
+
     class StoryViewHolder(val binding: ItemStoryBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = StoryViewHolder(
