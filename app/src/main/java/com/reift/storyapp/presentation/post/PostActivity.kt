@@ -62,9 +62,9 @@ class PostActivity : AppCompatActivity() {
     private fun uploadImage() {
         val description = binding.edtDescription.text.toString()
         if (photoFile == null) {
-            Toast.makeText(this, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.import_photo), Toast.LENGTH_SHORT).show()
         } else if (description.isNullOrEmpty()) {
-            Toast.makeText(this, "Silakan isi deskripsi terlebih dahulu", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.fill_description), Toast.LENGTH_SHORT).show()
         } else {
             loadingDialog.startLoadingdialog()
             val file = reduceFileImage(photoFile as File)
@@ -73,7 +73,7 @@ class PostActivity : AppCompatActivity() {
                 when(resource){
                     is Resource.Success -> {
                         loadingDialog.dismissdialog()
-                        Toast.makeText(this, "Finish upload story", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.finish_upload), Toast.LENGTH_SHORT).show()
                         finishAffinity()
                         startActivity(Intent(this, MainActivity::class.java))
                     }

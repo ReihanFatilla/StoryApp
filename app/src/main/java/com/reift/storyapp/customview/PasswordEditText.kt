@@ -9,6 +9,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.reift.storyapp.R
 import com.reift.storyapp.`interface`.AuthTextListener
 
 class PasswordEditText: TextInputEditText {
@@ -27,10 +28,10 @@ class PasswordEditText: TextInputEditText {
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if(text.toString().length < 8 && !text.isNullOrEmpty()){
-                    textInputLayout.helperText = "Password lenght must be at least 8"
+                    textInputLayout.helperText = context.getString(R.string.password_length)
                     isValid.value = false
                 } else if(text.toString().contains(" ")){
-                    textInputLayout.helperText = "Password Cannot contain WhiteSpace"
+                    textInputLayout.helperText = context.getString(R.string.password_white_space)
                     isValid.value = false
                 } else {
                     textInputLayout.helperText = null

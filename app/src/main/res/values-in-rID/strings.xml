@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="invalid_username">Username tidak valid!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Masuk</string>
+    <string name="don_t_have_an_account">Tidak punya akun? </string>
+    <string name="register">Daftar</string>
+    <string name="already_have_an_account">Sudah punya akun? </string>
+    <string name="post_a_story">Unggah sebuah Cerita</string>
+    <string name="fill_your_story_description_here">Masukkan deskripsi kamu</string>
+    <string name="please_wait">Mohon tunggu</string>
+    <string name="password_white_space">Password tidak bisa memiliki spasi</string>
+    <string name="password_length">Password harus minimal memiliki 8 Karakter</string>
+    <string name="email_format">Harap gunakan format email yang benar</string>
+    <string name="username_leght">Password harus minimal memiliki 5 Karakter</string>
+    <string name="username_space">Username tidak bisa memiliki spasi</string>
+    <string name="incorrect_email_password">Email atau password salah</string>
+    <string name="import_photo">Silakan masukkan berkas gambar terlebih dahulu.</string>
+    <string name="fill_description">Silakan isi deskripsi terlebih dahulu</string>
+    <string name="finish_upload">Berhasil mengunggah</string>
+</resources>

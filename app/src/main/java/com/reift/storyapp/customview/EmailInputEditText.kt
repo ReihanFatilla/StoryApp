@@ -9,6 +9,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.reift.storyapp.R
 import com.reift.storyapp.`interface`.AuthTextListener
 
 class EmailInputEditText: TextInputEditText {
@@ -27,7 +28,7 @@ class EmailInputEditText: TextInputEditText {
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if(!android.util.Patterns.EMAIL_ADDRESS.matcher(text.toString()).matches()){
-                    textInputLayout.helperText = "Please use valid email format"
+                    textInputLayout.helperText = context.getString(R.string.email_format)
                     isValid.value = false
                 } else {
                     textInputLayout.helperText = null

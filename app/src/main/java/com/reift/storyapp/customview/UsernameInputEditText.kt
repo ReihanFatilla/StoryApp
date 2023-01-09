@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.reift.storyapp.R
 
 class UsernameInputEditText: TextInputEditText {
 
@@ -24,10 +25,10 @@ class UsernameInputEditText: TextInputEditText {
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if(text.toString().length < 5 && !text.isNullOrEmpty()){
-                    textInputLayout.helperText = "Password lenght must be at least 5"
+                    textInputLayout.helperText = context.getString(R.string.username_leght)
                     isValid.value = false
                 } else if(text.toString().contains(" ")){
-                    textInputLayout.helperText = "Username Cannot contain WhiteSpace"
+                    textInputLayout.helperText = context.getString(R.string.username_space)
                     isValid.value = false
                 } else {
                     textInputLayout.helperText = null
