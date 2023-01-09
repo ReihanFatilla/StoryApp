@@ -26,11 +26,8 @@ class EmailInputEditText: TextInputEditText {
             }
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(!text.toString().contains("@")){
-                    textInputLayout.helperText = "Please use email format using \"@\""
-                    isValid.value = false
-                } else if(text.toString().contains(" ")){
-                    textInputLayout.helperText = "Email Cannot contain WhiteSpace"
+                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(text.toString()).matches()){
+                    textInputLayout.helperText = "Please use valid email format"
                     isValid.value = false
                 } else {
                     textInputLayout.helperText = null

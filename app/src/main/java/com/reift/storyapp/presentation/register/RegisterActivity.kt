@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.databinding.ActivityRegisterBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.login.LoginActivity
@@ -39,28 +40,19 @@ class RegisterActivity : AppCompatActivity() {
                 val username = edtUsername.text.toString()
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
-                viewModel.registerUser(username, email, password)
 
-                registerObserver()
+                viewModel.registerUser(username, email, password).observe(this@RegisterActivity){
+                    observeRegister(it)
+                }
+
             }
         }
     }
 
-    private fun registerObserver() {
-        viewModel.registerResponse.observe(this@RegisterActivity){
-            when(it){
-                is Resource.Success -> {
-                    if(it.data?.isError == false){
-                        intentToLogin()
-                    }
-                    Toast.makeText(this@RegisterActivity, it.data?.message, Toast.LENGTH_SHORT).show()
-                }
-                is Resource.Error -> {
-                    val message = "Register Error! either email is taken or invalid email format"
-                    Toast.makeText(this@RegisterActivity, message,Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
+    private fun observeRegister(register: Register?) {
+        Toast.makeText(applicationContext, register?.message.toString(), Toast.LENGTH_SHORT).show()
+        if(register?.isError == false){
+            intentToLogin()
         }
     }
 

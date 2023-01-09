@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.reift.storyapp.R
+import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.databinding.ActivityLoginBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.main.MainActivity
@@ -41,27 +42,17 @@ class LoginActivity : AppCompatActivity() {
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
 
-                viewModel.loginUser(email, password)
-                loginObserver()
+                viewModel.loginUser(email, password).observe(this@LoginActivity){
+                    observerLogin(it)
+                }
             }
         }
     }
 
-    private fun loginObserver() {
-        viewModel.loginResponse.observe(this){
-            when(it){
-                is Resource.Success -> {
-                    if(it.data?.isError == false){
-                        intentToMain()
-                    }
-                    Toast.makeText(this, it.data?.message, Toast.LENGTH_SHORT).show()
-                }
-                is Resource.Error -> {
-                    val message = "Login Error! either wrong email or password"
-                    Toast.makeText(this, message,Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
+    private fun observerLogin(login: Login?) {
+        Toast.makeText(applicationContext, login?.message.toString(), Toast.LENGTH_SHORT).show()
+        if(login?.isError == false){
+            intentToMain()
         }
     }
 
@@ -79,9 +70,7 @@ class LoginActivity : AppCompatActivity() {
     private fun setUpView() {
         binding.apply {
             tvRegister.setOnClickListener{
-                startActivity(
-                    Intent(this@LoginActivity, RegisterActivity::class.java)
-                )
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
                 finish()
             }
         }

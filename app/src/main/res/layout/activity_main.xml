@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EFEFEF"
+            android:background="@color/appbar_color"
             app:title="Story App"
             android:elevation="1dp"
             app:titleMarginStart="24dp"

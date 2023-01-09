@@ -1,10 +1,12 @@
 package com.reift.storyapp.data.repository.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.reift.storyapp.data.local.LocalDataSource
 import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.data.remote.response.login.LoginResponse
+import com.reift.storyapp.data.remote.response.login.LoginResult
 import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.data.remote.response.register.RegisterResponse
 import com.reift.storyapp.data.remote.retrofit.ApiService
@@ -33,7 +35,9 @@ class AuthUseCaseRepository(
                     call: Call<RegisterResponse>,
                     response: Response<RegisterResponse>
                 ) {
-                    register.value = response.body()?.map()
+                    if(response.isSuccessful){
+                        register.value = response.body()?.map()
+                    }
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
@@ -53,15 +57,20 @@ class AuthUseCaseRepository(
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
                 ) {
-                    val body = response.body()?.map()
-                    login.value = response.body()?.map()
-                    if(body?.isError == false){
-                        localDataSource.login(body.token)
+                    if(response.isSuccessful) {
+                        val body = response.body()?.map()
+                        login.value = response.body()?.map()
+                        if(body?.isError == false){
+                            localDataSource.login(body.token)
+                        }
+                    } else {
+                        login.value = LoginResponse(LoginResult(), error = true, message = "Incorrect email or password").map()
                     }
+
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    login.value = LoginResponse(loginResult = false, error = true, message = t.message.toString()).map()
+                    login.value = LoginResponse(LoginResult(), error = true, message = t.message.toString()).map()
                 }
 
             }
