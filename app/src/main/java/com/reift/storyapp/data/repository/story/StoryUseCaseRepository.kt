@@ -26,7 +26,7 @@ class StoryUseCaseRepository(
 
             override fun createCall(): Flowable<StoryResponse> {
                 Log.i("createCallcreateCall", "createCall: $authToken")
-                return apiService.getStories(authToken)
+                return apiService.getStories("Bearer "+ authToken)
             }
 
         }.asFlowable()

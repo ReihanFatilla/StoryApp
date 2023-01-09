@@ -9,6 +9,7 @@ import com.reift.storyapp.databinding.ActivityMainBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.login.LoginActivity
 import com.reift.storyapp.presentation.main.adapter.StoryAdapter
+import com.reift.storyapp.presentation.post.PostActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +23,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initView()
         initObserver()
         logoutButton()
+    }
+
+    private fun initView() {
+        binding.apply {
+            fabPost.setOnClickListener{
+                startActivity(Intent(this@MainActivity, PostActivity::class.java))
+            }
+        }
     }
 
     private fun logoutButton() {

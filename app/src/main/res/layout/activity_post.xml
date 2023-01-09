@@ -27,49 +27,68 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/btn_post"
+                android:id="@+id/btn_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_post"
+                android:src="@drawable/ic_upload"
                 android:layout_marginEnd="28dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_gravity="end" />
 
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:layout_marginEnd="28dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="start" />
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:clipToPadding="false">
+        android:layout_height="match_parent"
+        android:layout_marginTop="61dp"
+        android:layout_marginBottom="62dp">
 
-        <ImageView
-            android:id="@+id/img_thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="225dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="-16dp"
-            android:layout_marginEnd="-16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"/>
-
-        <EditText
-            android:id="@+id/edt_description"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Fill your story Description here"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="13sp"
-            android:textColor="@color/black"
-            android:padding="12dp"
-            android:background="@drawable/bg_post_edt"/>
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:clipToPadding="false">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <ImageView
+                android:id="@+id/img_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="-16dp"
+                android:layout_marginEnd="-16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"/>
+
+            <EditText
+                android:id="@+id/edt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Fill your story Description here"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:padding="12dp"
+                android:background="@drawable/bg_post_edt"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -80,7 +99,7 @@
         android:layout_marginBottom="48dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_camera"
+            android:id="@+id/fab_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera"
@@ -90,7 +109,7 @@
              />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_gallery"
+            android:id="@+id/fab_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_gallery"
