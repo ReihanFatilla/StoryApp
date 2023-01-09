@@ -69,8 +69,8 @@ class PostActivity : AppCompatActivity() {
                 when(resource){
                     is Resource.Success -> {
                         Toast.makeText(this, "Finish upload story", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
                         finishAffinity()
+                        startActivity(Intent(this, MainActivity::class.java))
                     }
                     else -> {}
                 }
