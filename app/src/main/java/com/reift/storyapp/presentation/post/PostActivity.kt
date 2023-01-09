@@ -13,6 +13,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.reift.storyapp.R
 import com.reift.storyapp.databinding.ActivityPostBinding
+import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.presentation.main.MainActivity
 import com.reift.storyapp.utils.MediaUtils.createCustomTempFile
 import com.reift.storyapp.utils.MediaUtils.reduceFileImage
 import com.reift.storyapp.utils.MediaUtils.uriToFile
@@ -48,11 +50,14 @@ class PostActivity : AppCompatActivity() {
             btnUpload.setOnClickListener {
                 uploadImage()
             }
+            btnBack.setOnClickListener {
+                finish()
+            }
         }
     }
 
     private fun uploadImage() {
-        val description = binding.edtDescription.toString()
+        val description = binding.edtDescription.text.toString()
         if (photoFile == null) {
             Toast.makeText(this, "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
         } else if (description.isNullOrEmpty()) {
@@ -60,6 +65,16 @@ class PostActivity : AppCompatActivity() {
         } else {
             val file = reduceFileImage(photoFile as File)
             viewModel.postStory(description, file)
+            viewModel.postResponse.observe(this){ resource ->
+                when(resource){
+                    is Resource.Success -> {
+                        Toast.makeText(this, "Finish upload story", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finishAffinity()
+                    }
+                    else -> {}
+                }
+            }
         }
     }
 

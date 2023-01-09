@@ -73,8 +73,8 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             tvLogin.setOnClickListener{
                 intentToLogin()
+                finish()
             }
-            finish()
         }
     }
 
