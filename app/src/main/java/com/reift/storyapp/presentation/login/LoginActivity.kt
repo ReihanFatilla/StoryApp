@@ -101,11 +101,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateForm(){
         binding.apply {
-            edtPassword.validateLenght(tilPassword).observe(this@LoginActivity){
-                viewModel.buttonEnabled.value = it == true
-            }
-            edtEmail.validateFormat(tilEmail).observe(this@LoginActivity){
-                viewModel.buttonEnabled.value = it == true
+            var emailValid = false
+            var passwordValid = false
+            edtPassword.validateLenght(tilPassword)
+                .observe(this@LoginActivity) {
+                    passwordValid = it
+                    viewModel.buttonEnabled.value = passwordValid && emailValid
+                }
+            edtEmail.validateFormat(tilEmail).observe(this@LoginActivity) {
+                emailValid = it
+                viewModel.buttonEnabled.value = passwordValid && emailValid
             }
         }
     }

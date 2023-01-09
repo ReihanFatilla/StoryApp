@@ -1,11 +1,12 @@
 package com.reift.storyapp.presentation.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.databinding.ActivityRegisterBinding
 import com.reift.storyapp.presentation.dialog.LoadingDialog
@@ -51,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun buttonEnablelation() {
-        viewModel.buttonEnabled.observe(this){
+        viewModel.buttonEnabled.observe(this) {
             binding.btnRegister.isEnabled = it
         }
     }
@@ -64,7 +65,7 @@ class RegisterActivity : AppCompatActivity() {
                 val password = edtPassword.text.toString()
 
                 loadingDialog.startLoadingdialog()
-                viewModel.registerUser(username, email, password).observe(this@RegisterActivity){
+                viewModel.registerUser(username, email, password).observe(this@RegisterActivity) {
                     observeRegister(it)
                 }
             }
@@ -73,37 +74,46 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun observeRegister(register: Register?) {
         Toast.makeText(applicationContext, register?.message.toString(), Toast.LENGTH_SHORT).show()
-        if(register?.isError == false){
+        if (register?.isError == false) {
             intentToLogin()
         }
         loadingDialog.dismissdialog()
     }
 
-    private fun intentToLogin(){
+    private fun intentToLogin() {
         startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
         finish()
     }
 
     private fun setUpView() {
         binding.apply {
-            tvLogin.setOnClickListener{
+            tvLogin.setOnClickListener {
                 intentToLogin()
                 finish()
             }
         }
     }
 
-    private fun validateForm(){
+    private fun validateForm() {
         binding.apply {
-            edtPassword.validateLenght(tilPassword).observe(this@RegisterActivity){
-                viewModel.buttonEnabled.value = it == true
+            var usernameValid = false
+            var emailValid = false
+            var passwordValid = false
+            edtPassword.validateLenght(tilPassword)
+                .observe(this@RegisterActivity) {
+                    passwordValid = it
+                    viewModel.buttonEnabled.value = passwordValid && emailValid && usernameValid
+                }
+            edtEmail.validateFormat(tilEmail).observe(this@RegisterActivity) {
+                emailValid = it
+                viewModel.buttonEnabled.value = passwordValid && emailValid && usernameValid
             }
-            edtEmail.validateFormat(tilEmail).observe(this@RegisterActivity){
-                viewModel.buttonEnabled.value = it == true
-            }
-            edtUsername.validateUsername(tilUsername).observe(this@RegisterActivity){
-                viewModel.buttonEnabled.value = it == true
-            }
+            edtUsername.validateUsername(tilUsername)
+                .observe(this@RegisterActivity) {
+                    usernameValid = it
+                    viewModel.buttonEnabled.value = passwordValid && emailValid && usernameValid
+
+                }
         }
     }
 
