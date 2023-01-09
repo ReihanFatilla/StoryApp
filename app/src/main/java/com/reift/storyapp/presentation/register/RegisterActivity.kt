@@ -8,6 +8,7 @@ import android.os.Looper
 import android.widget.Toast
 import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.databinding.ActivityRegisterBinding
+import com.reift.storyapp.presentation.dialog.LoadingDialog
 import com.reift.storyapp.presentation.login.LoginActivity
 import com.reift.storyapp.utils.Animator
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -17,6 +18,8 @@ class RegisterActivity : AppCompatActivity() {
     private val viewModel: RegisterViewModel by viewModel()
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private var loadingDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +63,10 @@ class RegisterActivity : AppCompatActivity() {
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
 
+                loadingDialog.startLoadingdialog()
                 viewModel.registerUser(username, email, password).observe(this@RegisterActivity){
                     observeRegister(it)
                 }
-
             }
         }
     }
@@ -73,6 +76,7 @@ class RegisterActivity : AppCompatActivity() {
         if(register?.isError == false){
             intentToLogin()
         }
+        loadingDialog.dismissdialog()
     }
 
     private fun intentToLogin(){

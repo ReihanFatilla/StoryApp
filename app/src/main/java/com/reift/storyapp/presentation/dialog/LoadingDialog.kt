@@ -16,8 +16,9 @@ class LoadingDialog internal constructor(
 
         val inflater = activity.layoutInflater
         builder.setView(inflater.inflate(R.layout.loading_dialog, null))
-        builder.setCancelable(true)
+        builder.setCancelable(false)
         dialog = builder.create()
+        dialog.show()
     }
 
     fun dismissdialog() {

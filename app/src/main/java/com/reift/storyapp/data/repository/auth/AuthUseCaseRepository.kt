@@ -37,6 +37,8 @@ class AuthUseCaseRepository(
                 ) {
                     if(response.isSuccessful){
                         register.value = response.body()?.map()
+                    } else {
+                        register.value = RegisterResponse(error = true, message = "Invalid email format").map()
                     }
                 }
 

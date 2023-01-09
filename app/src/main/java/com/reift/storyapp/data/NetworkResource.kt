@@ -23,6 +23,7 @@ abstract class NetworkResource<ResultType, RequestType> {
         val apiResponse = createCall()
 
         result.onNext(Resource.Loading())
+
         val response = apiResponse
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

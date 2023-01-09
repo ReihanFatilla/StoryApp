@@ -10,6 +10,7 @@ import com.reift.storyapp.R
 import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.databinding.ActivityLoginBinding
 import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.presentation.dialog.LoadingDialog
 import com.reift.storyapp.presentation.main.MainActivity
 import com.reift.storyapp.presentation.register.RegisterActivity
 import com.reift.storyapp.utils.Animator
@@ -20,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val viewModel: LoginViewModel by viewModel()
+
+    private var loadingDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
 
+                loadingDialog.startLoadingdialog()
                 viewModel.loginUser(email, password).observe(this@LoginActivity){
                     observerLogin(it)
                 }
@@ -72,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
         if(login?.isError == false){
             intentToMain()
         }
+        loadingDialog.dismissdialog()
     }
 
     private fun intentToMain() {

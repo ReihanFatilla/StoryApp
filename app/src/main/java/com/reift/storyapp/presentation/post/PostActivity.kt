@@ -14,6 +14,7 @@ import androidx.core.content.FileProvider
 import com.reift.storyapp.R
 import com.reift.storyapp.databinding.ActivityPostBinding
 import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.presentation.dialog.LoadingDialog
 import com.reift.storyapp.presentation.main.MainActivity
 import com.reift.storyapp.utils.MediaUtils.createCustomTempFile
 import com.reift.storyapp.utils.MediaUtils.reduceFileImage
@@ -30,6 +31,8 @@ class PostActivity : AppCompatActivity() {
     private val viewModel: PostViewModel by viewModel()
 
     private var photoFile: File? = null
+
+    private var loadingDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,14 +66,22 @@ class PostActivity : AppCompatActivity() {
         } else if (description.isNullOrEmpty()) {
             Toast.makeText(this, "Silakan isi deskripsi terlebih dahulu", Toast.LENGTH_SHORT).show()
         } else {
+            loadingDialog.startLoadingdialog()
             val file = reduceFileImage(photoFile as File)
             viewModel.postStory(description, file)
             viewModel.postResponse.observe(this){ resource ->
                 when(resource){
                     is Resource.Success -> {
+                        loadingDialog.dismissdialog()
                         Toast.makeText(this, "Finish upload story", Toast.LENGTH_SHORT).show()
                         finishAffinity()
                         startActivity(Intent(this, MainActivity::class.java))
+                    }
+                    is Resource.Loading -> {
+                        loadingDialog.startLoadingdialog()
+                    }
+                    is Resource.Error -> {
+                        loadingDialog.dismissdialog()
                     }
                     else -> {}
                 }
