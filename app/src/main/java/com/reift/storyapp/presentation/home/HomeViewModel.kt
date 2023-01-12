@@ -1,4 +1,4 @@
-package com.reift.storyapp.presentation.main
+package com.reift.storyapp.presentation.home
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
@@ -7,7 +7,7 @@ import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.domain.usecase.story.StoryUseCase
 
-class MainViewModel(
+class HomeViewModel(
     val storyUseCase: StoryUseCase
 ): ViewModel() {
 

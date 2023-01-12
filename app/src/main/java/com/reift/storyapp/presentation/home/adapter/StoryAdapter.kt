@@ -1,4 +1,4 @@
-package com.reift.storyapp.presentation.main.adapter
+package com.reift.storyapp.presentation.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

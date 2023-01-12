@@ -1,4 +1,4 @@
-package com.reift.storyapp.presentation.main
+package com.reift.storyapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,9 @@ import com.reift.storyapp.constant.BundleConst
 import com.reift.storyapp.databinding.ActivityMainBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.detail.DetailBottomFragment
+import com.reift.storyapp.presentation.home.HomeViewModel
 import com.reift.storyapp.presentation.login.LoginActivity
-import com.reift.storyapp.presentation.main.adapter.StoryAdapter
+import com.reift.storyapp.presentation.home.adapter.StoryAdapter
 import com.reift.storyapp.presentation.post.PostActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
