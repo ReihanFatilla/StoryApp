@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.reift.storyapp.R
 import com.reift.storyapp.constant.BundleConst
 import com.reift.storyapp.databinding.ActivityMainBinding
 import com.reift.storyapp.domain.entity.Resource
@@ -19,61 +22,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel: HomeViewModel by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initView()
-        initObserver()
-        logoutButton()
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        binding.navView.setupWithNavController(navController)
+
+
     }
 
-    private fun initView() {
-        binding.apply {
-            fabPost.setOnClickListener{
-                startActivity(Intent(this@MainActivity, PostActivity::class.java))
-            }
-        }
-    }
 
-    private fun logoutButton() {
-        binding.btnLogout.setOnClickListener {
-            viewModel.logout()
-            intentToLogin()
-        }
-    }
-
-    private fun intentToLogin() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
-    }
-
-    private fun initObserver() {
-        viewModel.getAllStories()
-        viewModel.storyResponse.observe(this) { resource ->
-            when (resource) {
-                is Resource.Success -> {
-                    binding.rvStory.apply {
-                        val mAdapter = StoryAdapter{ story ->
-                            val bundle = Bundle()
-                            val detailBottomFragment = DetailBottomFragment()
-                            bundle.putParcelable(BundleConst.DETAIL_DATA, story)
-                            detailBottomFragment.arguments = bundle
-                            detailBottomFragment.show(supportFragmentManager, null)
-                        }
-                        adapter = mAdapter
-                        layoutManager = LinearLayoutManager(applicationContext)
-                        resource.data?.let { story -> mAdapter.setStory(story) }
-                    }
-                }
-                is Resource.Error -> {
-                    Toast.makeText(applicationContext, resource.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
-    }
 }
