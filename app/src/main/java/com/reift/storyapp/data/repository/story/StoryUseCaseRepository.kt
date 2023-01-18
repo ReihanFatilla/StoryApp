@@ -8,7 +8,7 @@ import com.reift.storyapp.data.remote.retrofit.ApiService
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.domain.usecase.story.StoryUseCase
-import com.reift.storyapp.mapper.StoryMapper.map
+import com.reift.storyapp.mapper.StoryMapper.mapStory
 import io.reactivex.rxjava3.core.Flowable
 
 class StoryUseCaseRepository(
@@ -16,17 +16,16 @@ class StoryUseCaseRepository(
     val localDataSource: LocalDataSource
 ): StoryUseCase {
 
-    val authToken = localDataSource.getAuthToken()
+    val authToken = "Bearer: "+ localDataSource.getAuthToken()
 
     override fun getAllStories(): Flowable<Resource<List<Story>>> {
         return object: NetworkResource<List<Story>, StoryResponse>(){
             override fun createResult(data: StoryResponse): List<Story> {
-                return data.map()
+                return data.mapStory()
             }
 
             override fun createCall(): Flowable<StoryResponse> {
-                Log.i("createCallcreateCall", "createCall: $authToken")
-                return apiService.getStories("Bearer "+ authToken)
+                return apiService.getStories(authToken)
             }
 
         }.asFlowable()

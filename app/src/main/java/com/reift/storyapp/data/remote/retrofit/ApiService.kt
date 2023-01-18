@@ -17,6 +17,12 @@ interface ApiService {
         @Header("Authorization") authToken: String
     ) : Flowable<StoryResponse>
 
+    @GET("stories")
+    fun getStoriesLocation(
+        @Header("Authorization") authToken: String,
+        @Query("location") lat: String = "1",
+    ) : Flowable<StoryResponse>
+
     @FormUrlEncoded
     @POST("register")
     fun registerUser(
