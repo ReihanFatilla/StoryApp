@@ -16,7 +16,7 @@ class LocationUsecaseRepository(
     val localDataSource: LocalDataSource
 ): LocationUsecase {
 
-    val authToken = localDataSource.getAuthToken()
+    private val authToken = "Bearer " + localDataSource.getAuthToken()
 
     override fun getPhotoLocation(): Flowable<Resource<List<Location>>> {
         return object: NetworkResource<List<Location>, StoryResponse>(){

@@ -16,7 +16,7 @@ class StoryUseCaseRepository(
     val localDataSource: LocalDataSource
 ): StoryUseCase {
 
-    val authToken = "Bearer: "+ localDataSource.getAuthToken()
+    val authToken = "Bearer "+ localDataSource.getAuthToken()
 
     override fun getAllStories(): Flowable<Resource<List<Story>>> {
         return object: NetworkResource<List<Story>, StoryResponse>(){

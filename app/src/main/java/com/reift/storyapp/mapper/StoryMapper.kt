@@ -24,7 +24,8 @@ object StoryMapper {
             with(story) {
                 Location(
                     long = lon ?: 0.0,
-                    lat = lat ?: 0.0
+                    lat = lat ?: 0.0,
+                    creator = name.orEmpty(),
                 )
             }
         } ?: listOf()
