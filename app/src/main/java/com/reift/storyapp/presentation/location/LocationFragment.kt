@@ -16,7 +16,7 @@ class LocationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLocationBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root

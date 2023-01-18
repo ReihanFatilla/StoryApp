@@ -4,15 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../../layout/custom_preview.xml" value="0.14994934143870314" />
+        <entry key="app/src/main/res/drawable/bg_nav_bar.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/bg_post_edt.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/ic_img.xml" value="0.105" />
+        <entry key="app/src/main/res/drawable/nav_item_color.xml" value="0.105" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_post.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_detail_bottom.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_location.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_story.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/loading_dialog.xml" value="0.28125" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/xml/file_paths.xml" value="0.28125" />
       </map>
     </option>
