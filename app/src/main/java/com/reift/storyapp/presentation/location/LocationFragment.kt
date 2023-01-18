@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -27,6 +28,8 @@ class LocationFragment : Fragment() {
 
     private val boundsBuilder = LatLngBounds.Builder()
 
+    private val viewModel: LocationViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +37,6 @@ class LocationFragment : Fragment() {
         binding = FragmentLocationBinding.inflate(layoutInflater)
 
         setUpMapCallAsync()
-
 
         return binding.root
     }
