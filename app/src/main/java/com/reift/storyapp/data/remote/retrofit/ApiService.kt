@@ -5,6 +5,7 @@ import com.reift.storyapp.data.remote.response.post.PostResponse
 import com.reift.storyapp.data.remote.response.register.RegisterResponse
 import com.reift.storyapp.data.remote.response.story.StoryResponse
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -14,8 +15,9 @@ interface ApiService {
 
     @GET("stories")
     fun getStories(
-        @Header("Authorization") authToken: String
-    ) : Flowable<StoryResponse>
+        @Header("Authorization") authToken: String,
+        @Query("page") page: Int
+    ) : Single<StoryResponse>
 
     @GET("stories")
     fun getStoriesLocation(

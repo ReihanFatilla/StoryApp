@@ -1,7 +1,13 @@
 package com.reift.storyapp.data.repository.story
 
 import android.util.Log
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import androidx.paging.rxjava3.flowable
 import com.reift.storyapp.data.NetworkResource
+import com.reift.storyapp.data.StoryPagingSource
 import com.reift.storyapp.data.local.LocalDataSource
 import com.reift.storyapp.data.remote.response.story.StoryResponse
 import com.reift.storyapp.data.remote.retrofit.ApiService
@@ -18,17 +24,16 @@ class StoryUseCaseRepository(
 
     val authToken = "Bearer "+ localDataSource.getAuthToken()
 
-    override fun getAllStories(): Flowable<Resource<List<Story>>> {
-        return object: NetworkResource<List<Story>, StoryResponse>(){
-            override fun createResult(data: StoryResponse): List<Story> {
-                return data.mapStory()
+    override fun getAllStories(): Flowable<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, authToken)
             }
+        ).flowable
 
-            override fun createCall(): Flowable<StoryResponse> {
-                return apiService.getStories(authToken)
-            }
-
-        }.asFlowable()
     }
 
     override fun logout() {

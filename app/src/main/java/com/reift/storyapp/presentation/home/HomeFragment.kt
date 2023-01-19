@@ -14,13 +14,17 @@ import com.reift.storyapp.databinding.FragmentHomeBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.detail.DetailBottomFragment
 import com.reift.storyapp.presentation.home.adapter.StoryAdapter
+import com.reift.storyapp.presentation.home.adapter.StoryRxAdapter
 import com.reift.storyapp.presentation.login.LoginActivity
 import com.reift.storyapp.presentation.post.PostActivity
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val mDisposable = CompositeDisposable()
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -59,29 +63,28 @@ class HomeFragment : Fragment() {
     }
 
     private fun initObserver() {
-        viewModel.getAllStories()
-        viewModel.storyResponse.observe(viewLifecycleOwner) { resource ->
-            when (resource) {
-                is Resource.Success -> {
-                    binding.rvStory.apply {
-                        val mAdapter = StoryAdapter{ story ->
-                            val bundle = Bundle()
-                            val detailBottomFragment = DetailBottomFragment()
-                            bundle.putParcelable(BundleConst.DETAIL_DATA, story)
-                            detailBottomFragment.arguments = bundle
-                            detailBottomFragment.show(requireActivity().supportFragmentManager, null)
-                        }
-                        adapter = mAdapter
-                        layoutManager = LinearLayoutManager(context)
-                        resource.data?.let { story -> mAdapter.setStory(story) }
-                    }
-                }
-                is Resource.Error -> {
-                    Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
+
+        binding.rvStory.apply {
+            val mAdapter = StoryRxAdapter{ story ->
+                val bundle = Bundle()
+                val detailBottomFragment = DetailBottomFragment()
+                bundle.putParcelable(BundleConst.DETAIL_DATA, story)
+                detailBottomFragment.arguments = bundle
+                detailBottomFragment.show(requireActivity().supportFragmentManager, null)
             }
+            viewModel.getAllStories()
+            mDisposable.add(viewModel.getAllStories().subscribe{
+                mAdapter.submitData(lifecycle, it)
+            })
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(context)
         }
+    }
+
+    override fun onDestroyView() {
+        mDisposable.dispose()
+
+        super.onDestroyView()
     }
 
 }
