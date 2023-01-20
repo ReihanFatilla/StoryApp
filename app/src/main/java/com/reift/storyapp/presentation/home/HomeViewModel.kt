@@ -1,12 +1,9 @@
 package com.reift.storyapp.presentation.home
 
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
-import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.domain.usecase.story.StoryUseCase
 import io.reactivex.rxjava3.core.Flowable

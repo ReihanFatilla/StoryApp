@@ -1,6 +1,5 @@
 package com.reift.storyapp.data
 
-import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.reift.storyapp.data.remote.retrofit.ApiService

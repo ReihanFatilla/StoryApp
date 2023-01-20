@@ -5,5 +5,4 @@ import com.reift.storyapp.domain.usecase.story.StoryUseCase
 
 class DetailViewModel(
     val storyUseCase: StoryUseCase
-): ViewModel() {
-}
+): ViewModel()

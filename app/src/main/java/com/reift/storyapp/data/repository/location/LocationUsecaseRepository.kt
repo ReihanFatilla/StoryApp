@@ -6,7 +6,6 @@ import com.reift.storyapp.data.remote.response.story.StoryResponse
 import com.reift.storyapp.data.remote.retrofit.ApiService
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.domain.entity.location.Location
-import com.reift.storyapp.domain.entity.story.Story
 import com.reift.storyapp.domain.usecase.location.LocationUsecase
 import com.reift.storyapp.mapper.StoryMapper.mapLocation
 import io.reactivex.rxjava3.core.Flowable

@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.databinding.ActivityLoginBinding
-import com.reift.storyapp.presentation.dialog.LoadingDialog
 import com.reift.storyapp.presentation.MainActivity
+import com.reift.storyapp.presentation.dialog.LoadingDialog
 import com.reift.storyapp.presentation.register.RegisterActivity
 import com.reift.storyapp.utils.Animator
 import org.koin.android.viewmodel.ext.android.viewModel
