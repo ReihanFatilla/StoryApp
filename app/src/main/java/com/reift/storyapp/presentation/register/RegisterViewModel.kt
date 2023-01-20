@@ -7,7 +7,7 @@ import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.domain.usecase.auth.AuthUseCase
 
 class RegisterViewModel(
-    val authUseCase: AuthUseCase
+    private val authUseCase: AuthUseCase
 ): ViewModel() {
 
     val buttonEnabled = MutableLiveData(false)
