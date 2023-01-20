@@ -19,7 +19,7 @@ class StoryPagingSource(val apiService: ApiService, val authToken: String) :
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Story>> {
         val position = params.key ?: 1
 
-        return apiService.getStories(authToken, position)
+        return apiService.getStories(authToken, position, params.loadSize)
             .subscribeOn(Schedulers.io())
             .map { it.mapStory() }
             .map { toLoadResult(it, position) }
@@ -29,8 +29,8 @@ class StoryPagingSource(val apiService: ApiService, val authToken: String) :
     private fun toLoadResult(data: List<Story>, position: Int): LoadResult<Int, Story> {
         return LoadResult.Page(
             data = data,
-            prevKey = if (position == INITIAL_PAGE_INDEX) null else position - INITIAL_PAGE_INDEX,
-            nextKey = if (position == data.size) null else position + INITIAL_PAGE_INDEX
+            prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
+            nextKey = if (data.isEmpty()) null else position + 1
         )
     }
 

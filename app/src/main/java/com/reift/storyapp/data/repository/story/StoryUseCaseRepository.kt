@@ -27,7 +27,8 @@ class StoryUseCaseRepository(
     override fun getAllStories(): Flowable<PagingData<Story>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 5,
+                initialLoadSize = 5
             ),
             pagingSourceFactory = {
                 StoryPagingSource(apiService, authToken)

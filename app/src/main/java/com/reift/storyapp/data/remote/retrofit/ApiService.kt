@@ -16,7 +16,8 @@ interface ApiService {
     @GET("stories")
     fun getStories(
         @Header("Authorization") authToken: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ) : Single<StoryResponse>
 
     @GET("stories")
