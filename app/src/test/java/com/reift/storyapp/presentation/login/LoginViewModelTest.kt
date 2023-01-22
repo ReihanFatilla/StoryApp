@@ -55,6 +55,8 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun isUserLogin() {
+    fun `when getting user credential should call isUserLogin on AuthUseCaseRepository`() {
+        viewModel.isUserLogin()
+        Mockito.verify(authUseCaseRepository).isUserLogin()
     }
 }
