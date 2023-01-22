@@ -32,26 +32,27 @@ class StoryRemoteMediator(
         state: PagingState<Int, StoryEntity>
     ): Single<MediatorResult> {
 
-        val page = when (loadType) {
-            LoadType.REFRESH ->{
-                val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1) ?: INITIAL_PAGE_INDEX
-            }
-            LoadType.PREPEND -> {
-                val remoteKeys = getRemoteKeyForFirstItem(state)
-
-                val prevKey = remoteKeys?.prevKey
-                    ?: return Single.just(MediatorResult.Success(endOfPaginationReached = remoteKeys != null))
-                prevKey
-            }
-            LoadType.APPEND -> {
-                val remoteKeys = getRemoteKeyForLastItem(state)
-
-                val nextKey = remoteKeys?.nextKey
-                    ?: return Single.just(MediatorResult.Success(endOfPaginationReached = remoteKeys != null))
-                nextKey
-            }
-        }
+//        val page = when (loadType) {
+//            LoadType.REFRESH ->{
+//                val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
+//                remoteKeys?.nextKey?.minus(1) ?: INITIAL_PAGE_INDEX
+//            }
+//            LoadType.PREPEND -> {
+//                val remoteKeys = getRemoteKeyForFirstItem(state)
+//
+//                val prevKey = remoteKeys?.prevKey
+//                    ?: return Single.just(MediatorResult.Success(endOfPaginationReached = remoteKeys != null))
+//                prevKey
+//            }
+//            LoadType.APPEND -> {
+//                val remoteKeys = getRemoteKeyForLastItem(state)
+//
+//                val nextKey = remoteKeys?.nextKey
+//                    ?: return Single.just(MediatorResult.Success(endOfPaginationReached = remoteKeys != null))
+//                nextKey
+//            }
+//        }
+        val page = INITIAL_PAGE_INDEX
 
         return apiService.getStories(authToken, page, state.config.pageSize)
             .subscribeOn(Schedulers.io())
@@ -76,23 +77,23 @@ class StoryRemoteMediator(
             }
     }
 
-    private fun getRemoteKeyForLastItem(state: PagingState<Int, StoryEntity>): RemoteKeys? {
-        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { data ->
-            database.remoteKeysDao().getRemoteKeysId(data.id)
-        }
-    }
-    private fun getRemoteKeyForFirstItem(state: PagingState<Int, StoryEntity>): RemoteKeys? {
-        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { data ->
-            database.remoteKeysDao().getRemoteKeysId(data.id)
-        }
-    }
-    private fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, StoryEntity>): RemoteKeys? {
-        return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { id ->
-                database.remoteKeysDao().getRemoteKeysId(id)
-            }
-        }
-    }
+//    private fun getRemoteKeyForLastItem(state: PagingState<Int, StoryEntity>): RemoteKeys? {
+//        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { data ->
+//            database.remoteKeysDao().getRemoteKeysId(data.id)
+//        }
+//    }
+//    private fun getRemoteKeyForFirstItem(state: PagingState<Int, StoryEntity>): RemoteKeys? {
+//        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { data ->
+//            database.remoteKeysDao().getRemoteKeysId(data.id)
+//        }
+//    }
+//    private fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, StoryEntity>): RemoteKeys? {
+//        return state.anchorPosition?.let { position ->
+//            state.closestItemToPosition(position)?.id?.let { id ->
+//                database.remoteKeysDao().getRemoteKeysId(id)
+//            }
+//        }
+//    }
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1

@@ -1,6 +1,7 @@
 package com.reift.storyapp.utils
 
-import com.reift.storyapp.domain.entity.Resource
+import com.reift.storyapp.data.remote.response.login.Login
+import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.domain.entity.story.Story
 
 object DummyData {
@@ -19,7 +20,20 @@ object DummyData {
         return listStory
     }
 
-    fun generateError(): Resource<List<Story>> {
-        return Resource.Error("Error Network")
+    fun generatorDummyRegister(): Register {
+        return Register(
+            false,
+            "Register Success"
+        )
+    }
+
+    fun generatorDummyLogin(): Login {
+        return Login(
+            false,
+            "Register Success",
+            "user123",
+            "123,",
+            "xs38ms241msda"
+        )
     }
 }
