@@ -1,10 +1,12 @@
 package com.reift.storyapp.data.local
 
 import com.reift.storyapp.constant.Pref
+import com.reift.storyapp.data.local.room.database.StoryDatabase
 import com.reift.storyapp.data.local.sharedpreferences.PreferenceHelper
 
 class LocalDataSource(
-    val preferenceHelper: PreferenceHelper
+    val preferenceHelper: PreferenceHelper,
+    val storyDatabase: StoryDatabase
 ) {
 
     fun isUserLogin(): Boolean {

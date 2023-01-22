@@ -6,6 +6,17 @@ import com.reift.storyapp.domain.entity.location.Location
 import com.reift.storyapp.domain.entity.story.Story
 
 object StoryMapper {
+
+    fun StoryEntity.mapStory(): Story {
+        return Story(
+            photoUrl = photoUrl.orEmpty(),
+            createdAt = createdAt.orEmpty(),
+            name = name.orEmpty(),
+            description = description.orEmpty(),
+            id = id.orEmpty()
+        )
+    }
+
     fun StoryResponse.mapStory(): List<Story> {
         return listStory?.map { story ->
             with(story) {

@@ -5,5 +5,5 @@ val allModules = listOf(
     networkModule,
     useCaseModule,
     viewModelModule,
-    preferenceModule
+    databaseModule
 )

@@ -4,5 +4,5 @@ import com.reift.storyapp.data.local.LocalDataSource
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    factory { LocalDataSource(get()) }
+    factory { LocalDataSource(get(), get()) }
 }

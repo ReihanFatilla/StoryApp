@@ -10,10 +10,10 @@ import com.reift.storyapp.data.local.room.entity.StoryEntity
 @Dao
 interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertQuote(quote: List<StoryEntity>)
+    suspend fun insertStory(quote: List<StoryEntity>)
 
     @Query("SELECT * FROM story")
-    fun getAllQuote(): PagingSource<Int, StoryEntity>
+    fun getAllStory(): PagingSource<Int, StoryEntity>
 
     @Query("DELETE FROM story")
     suspend fun deleteAll()
