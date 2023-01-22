@@ -13,7 +13,9 @@ object StoryMapper {
             createdAt = createdAt.orEmpty(),
             name = name.orEmpty(),
             description = description.orEmpty(),
-            id = id.orEmpty()
+            id = id.orEmpty(),
+            lat = lat ?: 0.0,
+            lon = lon ?: 0.0,
         )
     }
 
@@ -25,7 +27,9 @@ object StoryMapper {
                     createdAt = createdAt.orEmpty(),
                     name = name.orEmpty(),
                     description = description.orEmpty(),
-                    id = id.orEmpty()
+                    id = id.orEmpty(),
+                    lat = lat ?: 0.0,
+                    lon = lon ?: 0.0,
                 )
             }
         } ?: listOf()
