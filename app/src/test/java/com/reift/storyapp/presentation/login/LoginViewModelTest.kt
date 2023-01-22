@@ -52,7 +52,6 @@ class LoginViewModelTest {
         assertNotNull(actualLogin)
         assertEquals(actualLogin.isError, false)
         assertEquals(expectedLogin.value, actualLogin)
-
     }
 
     @Test
