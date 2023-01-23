@@ -14,6 +14,8 @@ object DummyData {
                 "https://www.google.com",
                 "https://www.google.com",
                 "https://www.google.com",
+                123.345,
+                123.456
             )
             listStory.add(news)
         }
