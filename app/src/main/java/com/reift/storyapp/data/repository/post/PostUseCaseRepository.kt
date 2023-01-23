@@ -1,5 +1,6 @@
 package com.reift.storyapp.data.repository.post
 
+import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import com.reift.storyapp.data.NetworkResource
 import com.reift.storyapp.data.local.LocalDataSource
@@ -45,8 +46,10 @@ class PostUseCaseRepository(
                 return if(latLng != null){
                     val lat = latLng.latitude.toString().toRequestBody("text/plain".toMediaType())
                     val lon = latLng.longitude.toString().toRequestBody("text/plain".toMediaType())
+                    Log.i("createCallcreateCall", "createCall: with Location")
                     apiService.postStoryWithLocation(authToken, imageMultipart, description, lat, lon)
                 } else {
+                    Log.i("createCallcreateCall", "createCall: no Location")
                     apiService.postStory(authToken, imageMultipart, description)
                 }
             }

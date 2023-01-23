@@ -8,25 +8,27 @@ import android.graphics.BitmapFactory
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.reift.storyapp.R
 import com.reift.storyapp.databinding.ActivityPostBinding
 import com.reift.storyapp.domain.entity.Resource
 import com.reift.storyapp.presentation.MainActivity
 import com.reift.storyapp.presentation.dialog.LoadingDialog
+import com.reift.storyapp.utils.Locationutils
 import com.reift.storyapp.utils.MediaUtils.createCustomTempFile
 import com.reift.storyapp.utils.MediaUtils.reduceFileImage
 import com.reift.storyapp.utils.MediaUtils.uriToFile
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 class PostActivity : AppCompatActivity() {
 
@@ -39,6 +41,12 @@ class PostActivity : AppCompatActivity() {
 
     private var photoFile: File? = null
     private var currentLocation: Location? = null
+    private val locationCallback = object : LocationCallback() {}
+    private val locationRequest = LocationRequest.create().apply {
+        interval = TimeUnit.SECONDS.toMillis(1)
+        maxWaitTime = TimeUnit.SECONDS.toMillis(1)
+        priority = Priority.PRIORITY_HIGH_ACCURACY
+    }
 
     private var loadingDialog = LoadingDialog(this)
 
@@ -67,34 +75,37 @@ class PostActivity : AppCompatActivity() {
                 finish()
             }
             btnProvideLocation.setOnClickListener {
-                provideLocation()
+                if(btnProvideLocation.isChecked){
+                    getLocation()
+                } else {
+                    currentLocation = null
+                }
             }
         }
     }
 
-    private fun provideLocation() {
-        requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-    }
-
-    private fun getMyLocation() {
-        if (ContextCompat.checkSelfPermission(
-                this.applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
+    private fun getLocation() {
+        if (Locationutils.checkPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) &&
+            Locationutils.checkPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null) {
-                    currentLocation = location
+            fusedLocationClient.lastLocation.addOnSuccessListener {
+                if (it != null) {
+                    currentLocation = it
                 } else {
                     Toast.makeText(
                         this,
-                        "Cannot find Location",
+                        "Location not found",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         } else {
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
         }
     }
 
@@ -182,14 +193,46 @@ class PostActivity : AppCompatActivity() {
 
     private val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                getMyLocation()
-            } else {
-                Toast.makeText(this, "Don't have location Permission", Toast.LENGTH_SHORT).show()
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true -> getLocation()
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true -> getLocation()
+                else -> {
+                    Toast.makeText(
+                        this,
+                        "Dont have location permission",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
+
+    private fun startLocationUpdates() {
+        if (Locationutils.checkPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) &&
+            Locationutils.checkPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+        }
+    }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    override fun onPause() {
+        stopLocationUpdates()
+        super.onPause()
+    }
 
 
 }
