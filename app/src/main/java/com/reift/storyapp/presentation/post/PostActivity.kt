@@ -3,7 +3,6 @@ package com.reift.storyapp.presentation.post
 import android.Manifest
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
-import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.location.Location
 import android.net.Uri
@@ -13,7 +12,6 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
@@ -94,7 +92,7 @@ class PostActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this,
-                        "Location not found",
+                        getString(R.string.txt_location_not_found),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -113,7 +111,7 @@ class PostActivity : AppCompatActivity() {
         val description = binding.edtDescription.text.toString()
         if (photoFile == null) {
             Toast.makeText(this, getString(R.string.import_photo), Toast.LENGTH_SHORT).show()
-        } else if (description.isNullOrEmpty()) {
+        } else if (description.isEmpty()) {
             Toast.makeText(this, getString(R.string.fill_description), Toast.LENGTH_SHORT).show()
         } else {
             loadingDialog.startLoadingdialog()

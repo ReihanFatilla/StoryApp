@@ -15,4 +15,5 @@
     <string name="import_photo">Please import the photo.</string>
     <string name="fill_description">Please fill the description</string>
     <string name="finish_upload">Finish upload story</string>
+    <string name="txt_location_not_found">Location not found</string>
 </resources>

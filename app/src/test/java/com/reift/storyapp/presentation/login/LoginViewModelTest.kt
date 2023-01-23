@@ -6,9 +6,9 @@ import com.reift.storyapp.data.remote.response.login.Login
 import com.reift.storyapp.data.repository.auth.AuthUseCaseRepository
 import com.reift.storyapp.utils.DummyData
 import com.reift.storyapp.utils.getOrAwaitValue
-import junit.framework.Assert.*
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

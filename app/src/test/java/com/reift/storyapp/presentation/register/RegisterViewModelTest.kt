@@ -4,14 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import com.reift.storyapp.data.remote.response.register.Register
 import com.reift.storyapp.data.repository.auth.AuthUseCaseRepository
-import com.reift.storyapp.presentation.login.LoginViewModel
 import com.reift.storyapp.utils.DummyData
 import com.reift.storyapp.utils.getOrAwaitValue
 import junit.framework.Assert
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
