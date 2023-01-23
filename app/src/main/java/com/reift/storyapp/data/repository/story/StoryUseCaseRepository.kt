@@ -15,7 +15,7 @@ class StoryUseCaseRepository(
     val localDataSource: LocalDataSource
 ) : StoryUseCase {
 
-    val authToken = "Bearer " + localDataSource.getAuthToken()
+    private val authToken = "Bearer " + localDataSource.getAuthToken()
 
     override fun getAllStories(): Flowable<PagingData<Story>> {
         @OptIn(ExperimentalPagingApi::class)

@@ -1,5 +1,6 @@
 package com.reift.storyapp.data.repository.post
 
+import com.google.android.gms.maps.model.LatLng
 import com.reift.storyapp.data.NetworkResource
 import com.reift.storyapp.data.local.LocalDataSource
 import com.reift.storyapp.data.remote.response.post.PostResponse
@@ -25,7 +26,8 @@ class PostUseCaseRepository(
 
     override fun postStory(
         description: String,
-        photo: File
+        photo: File,
+        latLng: LatLng?
     ): Flowable<Resource<Post>> {
         return object : NetworkResource<Post, PostResponse>() {
             override fun createResult(data: PostResponse): Post {
@@ -40,7 +42,13 @@ class PostUseCaseRepository(
                     photo.name,
                     requestImageFile
                 )
-                return apiService.postStory(authToken, imageMultipart, description)
+                return if(latLng != null){
+                    val lat = latLng.latitude.toString().toRequestBody("text/plain".toMediaType())
+                    val lon = latLng.longitude.toString().toRequestBody("text/plain".toMediaType())
+                    apiService.postStoryWithLocation(authToken, imageMultipart, description, lat, lon)
+                } else {
+                    apiService.postStory(authToken, imageMultipart, description)
+                }
             }
 
         }.asFlowable()

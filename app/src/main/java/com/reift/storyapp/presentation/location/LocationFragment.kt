@@ -74,7 +74,6 @@ class LocationFragment : Fragment() {
 
     private fun setUpMapCallAsync() {
 
-
         val onMapReady = OnMapReadyCallback { googleMap ->
             mMap = googleMap
 

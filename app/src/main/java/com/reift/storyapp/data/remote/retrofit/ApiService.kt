@@ -49,4 +49,14 @@ interface ApiService {
         @Part("description") description: RequestBody
     ) : Flowable<PostResponse>
 
+    @Multipart
+    @POST("stories")
+    fun postStoryWithLocation(
+        @Header("Authorization") userToken: String,
+        @Part image: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody,
+        @Part("lon") lon: RequestBody
+    ) : Flowable<PostResponse>
+
 }
