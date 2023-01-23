@@ -65,6 +65,7 @@ class HomeViewModelTest {
                 Mockito.verify(storyUseCaseRepository).getAllStories()
                 assertNotNull(differ.snapshot())
                 assertEquals(dummyStory.size, differ.snapshot().size)
+                assertEquals(dummyStory, differ.snapshot())
                 assertEquals(dummyStory[0].id, differ.snapshot()[0]?.id)
             }
         }
