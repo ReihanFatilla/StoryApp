@@ -46,10 +46,8 @@ class PostUseCaseRepository(
                 return if(latLng != null){
                     val lat = latLng.latitude.toString().toRequestBody("text/plain".toMediaType())
                     val lon = latLng.longitude.toString().toRequestBody("text/plain".toMediaType())
-                    Log.i("createCallcreateCall", "createCall: with Location")
                     apiService.postStoryWithLocation(authToken, imageMultipart, description, lat, lon)
                 } else {
-                    Log.i("createCallcreateCall", "createCall: no Location")
                     apiService.postStory(authToken, imageMultipart, description)
                 }
             }
